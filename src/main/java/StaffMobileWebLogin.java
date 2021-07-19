@@ -12,14 +12,14 @@ import java.net.URL;
 
 import static org.junit.Assert.assertTrue;
 
-public class MobileWebTest {
+public class StaffMobileWebLogin {
 
     public static final String URL = "https://staff.demo.fusion-team.com/";
     public static final String USER_admin = "fusion.team.llc@gmail.com";
     public static final String PASSWORD_admin = "AAAqqq111";
 
     @Test
-    public void testIncorrectFBLogin() throws Exception {
+    public void testIncorrectStaffLogin() throws Exception {
         System.out.println("Step 1. Create new driver");
         AppiumDriver driver = getAppiumDriver("iOS", new URL("http://127.0.0.1:4723/wd/hub"));
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -37,9 +37,27 @@ public class MobileWebTest {
         System.out.println("Step 5. Click Login button");
         driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/form/button/span[1]")).click();
 
-//        System.out.println("Step 6. Check error message");
-//        Thread.sleep(5000);
-//        assertTrue(driver.findElement(By.xpath("//*[@id=\"root\"]/h3")).getText().contains("Добро пожаловать!"));
+        System.out.println("Step 6. Close driver");
+        driver.quit();
+    }
+    @Test
+    public void testNonCorrectStaffLogin() throws Exception {
+        System.out.println("Step 1. Create new driver");
+        AppiumDriver driver = getAppiumDriver("iOS", new URL("http://127.0.0.1:4723/wd/hub"));
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        System.out.println("Step 2. Open staff");
+        driver.get(URL);
+
+        System.out.println("Step 3. Enter email");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.name("login")));
+        driver.findElement(By.name("login")).sendKeys(USER_admin);
+
+        System.out.println("Step 4. Enter non password");
+        driver.findElement(By.name("password")).sendKeys(PASSWORD_admin);
+
+        System.out.println("Step 5. Click Login button");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div[2]/form/button/span[1]")).click();
 
         System.out.println("Step 6. Close driver");
         driver.quit();
