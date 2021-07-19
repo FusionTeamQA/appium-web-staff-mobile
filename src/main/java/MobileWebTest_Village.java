@@ -10,9 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
-import static org.junit.Assert.assertTrue;
-
-public class MobileWebTest {
+public class MobileWebTest_Village {
 
     public static final String URL = "https://staff.demo.fusion-team.com/";
     public static final String USER_admin = "fusion.team.llc@gmail.com";
